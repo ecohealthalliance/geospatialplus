@@ -54,12 +54,17 @@ RUN apt-get update && apt-get install -y --force-yes --allow-unauthenticated --n
   && rm -rf /var/lib/apt/lists/ 
   
 ## Additional R packages
+RUN installGithub.r s-u/unixtools
+
+RUN Rscript -e "install.packages('INLA', repos=c(getOption('repos'), INLA='https://inla.r-inla-download.org/R/stable'), dependencies=TRUE)"
+
 RUN install2.r --error --skipinstalled \
   ape \
   assertr \
   aws.s3 \
   aws.signature \
   bayesplot \
+  bigmemory \
   brms \
   caret \
   cowplot \
@@ -70,17 +75,24 @@ RUN install2.r --error --skipinstalled \
   fields \
   fst \
   goodpractice \
+  gganimate \
+  ggraph \
+  ggiraph \
+  glmmTMB \
   here \
   jqr \
   keras \
   knitcitations \
   lme4 \
   matrixStats \
+  MCMCglmm \
   MonetDBLite \
   officer \
+  OpenMx \
   optimx \
   pkgdown \
   plotly \
+  pomp \
   prioritizr \
   rasterVis \
   RcppArmadillo \
@@ -101,6 +113,7 @@ RUN install2.r --error --skipinstalled \
   rvg \
   shinystan \
   threejs \
+  TMB \
   V8 \
   vegan \
   xgboost 
