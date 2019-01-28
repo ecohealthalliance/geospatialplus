@@ -75,7 +75,6 @@ RUN install2.r --error --skipinstalled \
   fields \
   fst \
   goodpractice \
-  gganimate \
   ggraph \
   ggiraph \
   glmmTMB \
