@@ -63,7 +63,7 @@ RUN installGithub.r s-u/unixtools eddelbuettel/littler \
 RUN Rscript -e "install.packages('INLA', repos=c(getOption('repos'), INLA='https://inla.r-inla-download.org/R/stable'), dependencies=TRUE, Ncpus = parallel::detectCores())"
 
 ## Some of the bigger installs first
-RUN install2.r --error --skipinstalled -r -n `nproc` \
+RUN install2.r --error --skipinstalled -n `nproc` \
   bayesplot \
   glmmTMB \
   jqr \
@@ -82,7 +82,7 @@ RUN install2.r --error --skipinstalled -r -n `nproc` \
   MonetDBLite 
 
 ## Now some more
-RUN install2.r --error --skipinstalled -r -n `nproc` \
+RUN install2.r --error --skipinstalled -n `nproc` \
   ape \
   assertr \
   aws.s3 \
