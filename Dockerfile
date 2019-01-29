@@ -54,16 +54,39 @@ RUN apt-get update && apt-get install -y --force-yes --allow-unauthenticated --n
   && rm -rf /var/lib/apt/lists/ 
   
 ## Additional R packages
-RUN installGithub.r s-u/unixtools
+RUN installGithub.r s-u/unixtools eddelbuettel/littler \
+  && ln -sf /usr/local/lib/R/site-library/littler/examples/install2.r /usr/local/bin/install2.r \
+  && ln -sf /usr/local/lib/R/site-library/littler/examples/installGithub.r /usr/local/bin/installGithub.r \
+  && ln -sf /usr/local/lib/R/site-library/littler/bin/r /usr/local/bin/r 
 
-RUN Rscript -e "install.packages('INLA', repos=c(getOption('repos'), INLA='https://inla.r-inla-download.org/R/stable'), dependencies=TRUE)"
+## INLA and Dependencies
+RUN Rscript -e "install.packages('INLA', repos=c(getOption('repos'), INLA='https://inla.r-inla-download.org/R/stable'), dependencies=TRUE, Ncpus = parallel::detectCores())"
 
-RUN install2.r --error --skipinstalled \
+## Some of the bigger installs first
+RUN install2.r --error --skipinstalled -r -n `nproc` \
+  bayesplot \
+  glmmTMB \
+  jqr \
+  lme4 \
+  MCMCglmm \
+  RcppArmadillo \
+  RcppGSL \
+  RcppZiggurat \
+  rJava \
+  rstan \
+  rstanarm \
+  shinystan \
+  xgboost \
+  matrixStats \
+  fst \
+  MonetDBLite 
+
+## Now some more
+RUN install2.r --error --skipinstalled -r -n `nproc` \
   ape \
   assertr \
   aws.s3 \
   aws.signature \
-  bayesplot \
   bigmemory \
   brms \
   caret \
@@ -73,19 +96,12 @@ RUN install2.r --error --skipinstalled \
   doParallel \
   fasterize \
   fields \
-  fst \
   goodpractice \
   ggraph \
   ggiraph \
-  glmmTMB \
   here \
-  jqr \
   keras \
   knitcitations \
-  lme4 \
-  matrixStats \
-  MCMCglmm \
-  MonetDBLite \
   officer \
   OpenMx \
   optimx \
@@ -94,25 +110,17 @@ RUN install2.r --error --skipinstalled \
   pomp \
   prioritizr \
   rasterVis \
-  RcppArmadillo \
-  RcppGSL \
-  RcppZiggurat \
   Rglpk \
   rgrass7 \
   rjags \
-  rJava \
   robustbase \
   ROI \
   ROI.plugin.glpk \
   ROI.plugin.symphony \
-  rstan \
-  rstanarm \
   Rsymphony \
   runjags \
   rvg \
-  shinystan \
   threejs \
   TMB \
   V8 \
-  vegan \
-  xgboost 
+  vegan
