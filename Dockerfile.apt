@@ -2,7 +2,7 @@ FROM ecohealthalliance/geospatialplus:geospatial
 MAINTAINER "Noam Ross" ross@ecohealthalliance.org
 
 ## Additional apt packages
-RUN apt-get update && apt-get install -y --force-yes --allow-unauthenticated --no-install-recommends --no-upgrade \
+RUN apt-get update && apt-get install -y --allow-downgrades --allow-remove-essential --allow-change-held-packages --allow-unauthenticated --no-install-recommends --no-upgrade \
   apt-transport-https \
   build-essential \
   byobu \
@@ -34,6 +34,7 @@ RUN apt-get update && apt-get install -y --force-yes --allow-unauthenticated --n
   libpoppler-cpp-dev \
   libprotobuf-dev \
   libprotoc-dev \
+  libsodium-dev \
   libtesseract-dev \
   lsb-release \
   man \
