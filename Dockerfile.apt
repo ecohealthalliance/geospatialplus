@@ -1,4 +1,4 @@
-FROM rocker/geospatial:latest
+FROM ecohealthalliance/geospatialplus:geospatial
 MAINTAINER "Noam Ross" ross@ecohealthalliance.org
 
 ## Additional apt packages
