@@ -24,7 +24,16 @@ RUN apt-get update \
     protobuf-compiler \
     tk-dev \
     unixodbc-dev \
-  && install2.r --error \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/
+
+RUN installGithub.r eddelbuettel/littler \
+  && ln -sf /usr/local/lib/R/site-library/littler/examples/install2.r /usr/local/bin/install2.r \
+  && ln -sf /usr/local/lib/R/site-library/littler/examples/installGithub.r /usr/local/bin/installGithub.r \
+  && ln -sf /usr/local/lib/R/site-library/littler/bin/r /usr/local/bin/r 
+  
+RUN echo "MAKEFLAGS=-j$(nproc)"  >> /usr/local/lib/R/etc/Makevars.site \
+  && install2.r --error --deps TRUE --skipinstalled -n `nproc` \
     RColorBrewer \
     RandomFields \
     RNetCDF \
@@ -50,4 +59,5 @@ RUN apt-get update \
     geoR \
     geosphere \
     ## from bioconductor
-    && R -e "BiocManager::install('rhdf5')"
+    && R -e "BiocManager::install('rhdf5')" \
+    && rm /usr/local/lib/R/etc/Makevars.site

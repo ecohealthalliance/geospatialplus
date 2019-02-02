@@ -2,7 +2,7 @@
 
 for tag in geospatial apt rstan inla cmpr
 do
-image=ecohealthalliance/geospatial:$tag
+image=ecohealthalliance/geospatialplus:$tag
   echo $image
   docker pull $image
   docker build -f Dockerfile.$tag --cache-from $image -t $image .
