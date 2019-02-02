@@ -1,6 +1,58 @@
 FROM rocker/geospatial:latest
 MAINTAINER "Noam Ross" ross@ecohealthalliance.org
 
+## Additional apt packages
+RUN apt-get update && apt-get install -y --force-yes --allow-unauthenticated --no-install-recommends --no-upgrade \
+  apt-transport-https \
+  build-essential \
+  byobu \
+  ccache \
+  coinor-libcgl-dev \
+  coinor-libsymphony-dev \
+  coinor-symphony \
+  coinor-symphony \
+  curl \
+  dirmngr \
+  fish \
+  git-core \
+  gnupg2 \
+  gnupg \
+  golang-1.8 \
+  golang-go \
+  graphviz \
+  grass \
+  grass-dev \
+  grass-doc \
+  htop \
+  jags \
+  libclang-dev \
+  libglpk-dev \
+  libgoogle-perftools-dev \
+  libleptonica-dev \
+  libnlopt-dev \
+  libopenmpi-dev \
+  libpoppler-cpp-dev \
+  libprotobuf-dev \
+  libprotoc-dev \
+  libtesseract-dev \
+  lsb-release \
+  man \
+  mosh \
+  ncdu \
+  protobuf-compiler \
+  pv \
+  python-dev \
+  python-pip \
+  python-setuptools \
+  ruby-full \
+  silversearcher-ag \
+  software-properties-common \
+  tesseract-ocr-eng \
+  tmux \
+  zsh \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/ 
+
 ## Some of the bigger installs first
 RUN echo "MAKEFLAGS=-j$(nproc)"  >> /usr/local/lib/R/etc/Makevars.site \
   && installGithub.r eddelbuettel/littler \
