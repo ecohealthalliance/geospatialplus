@@ -13,7 +13,6 @@ RUN echo "MAKEFLAGS=-j$(nproc)"  >> /usr/local/lib/R/etc/Makevars.site \
   hexbin \
   jqr \
   lme4 \
-  lwgeom \
   matrixStats \
   minqa \
   MonetDBLite \
