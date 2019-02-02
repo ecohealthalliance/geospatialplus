@@ -4,19 +4,12 @@ MAINTAINER "Noam Ross" ross@ecohealthalliance.org
 ## Install R packages that need compilation
 RUN echo "MAKEFLAGS=-j$(nproc)"  >> /usr/local/lib/R/etc/Makevars.site \
   && install2.r --error --skipinstalled -n `nproc` \
-  ape \
   bibtex \
-  dotCall64 \
   fasterize \
   fst \
   hexbin \
   jqr \
-  lme4 \
-  minqa \
   MonetDBLite \
-  mvtnorm \
-  nleqslv \
-  nloptr \
   officer \
   prioritizr \
   RcppArmadillo \
@@ -31,7 +24,6 @@ RUN echo "MAKEFLAGS=-j$(nproc)"  >> /usr/local/lib/R/etc/Makevars.site \
   runjags \
   rvg \
   slam \
-  spam \
   vegan \
   xgboost \
   zip \
