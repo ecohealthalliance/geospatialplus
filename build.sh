@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for tag in apt cmpr
+for tag in apt rstan inla cmpr
 do
 image=ecohealthalliance/geospatial:$tag
   echo $image

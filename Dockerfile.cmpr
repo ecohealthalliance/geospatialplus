@@ -1,4 +1,4 @@
-FROM ecohealthalliance/geospatialplus:apt
+FROM ecohealthalliance/geospatialplus:inla
 MAINTAINER "Noam Ross" ross@ecohealthalliance.org
 
 ## Install R packages that need compilation
@@ -12,7 +12,6 @@ RUN echo "MAKEFLAGS=-j$(nproc)"  >> /usr/local/lib/R/etc/Makevars.site \
   bibtex \
   dotCall64 \
   fasterize \
-  fields \
   fst \
   hexbin \
   jqr \
@@ -26,7 +25,6 @@ RUN echo "MAKEFLAGS=-j$(nproc)"  >> /usr/local/lib/R/etc/Makevars.site \
   officer \
   prioritizr \
   RcppArmadillo \
-  RcppEigen \
   RcppGSL \
   RcppZiggurat \
   reticulate \
@@ -34,14 +32,11 @@ RUN echo "MAKEFLAGS=-j$(nproc)"  >> /usr/local/lib/R/etc/Makevars.site \
   rjags \
   rJava \
   RJSONIO \
-  rstan \
-  rstanarm \
   Rsymphony \
   runjags \
   rvg \
   slam \
   spam \
-  StanHeaders \
   vegan \
   xgboost \
   zip \

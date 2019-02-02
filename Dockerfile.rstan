@@ -1,0 +1,10 @@
+FROM ecohealthalliance/geospatialplus:apt
+MAINTAINER "Noam Ross" ross@ecohealthalliance.org
+
+## Install R packages that need compilation
+RUN echo "MAKEFLAGS=-j$(nproc)"  >> /usr/local/lib/R/etc/Makevars.site \
+  && install2.r --error --deps TRUE--skipinstalled -n `nproc` \
+  rstan \
+  rstanarm \
+  brms \
+  && rm /usr/local/lib/R/etc/Makevars.site
